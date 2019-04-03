@@ -3,6 +3,7 @@
 
 import React, { useEffect } from 'react'
 import { initClient as loader } from '../gapi/gapi'
+import './signin.css'
 
 const SignIn = function(){
 
@@ -11,11 +12,10 @@ const SignIn = function(){
     })
 
     return(
-        <div>
-            <button id="authorize_button" style={{display: `none`}}>Authorize</button>
+        <span className="btn--group">
+            <button id="authorize_button" style={{display: `none`}}>Log In</button>
             <button id="signout_button" style={{display: `none`}}>Sign Out</button>
-            <pre id="content" style={{whiteSpace:`pre-wrap`}}></pre>
-        </div>
+        </span>
     )
 }
 

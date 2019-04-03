@@ -52,7 +52,7 @@
       })
         .then(function(data){
           console.log(JSON.stringify(data.result.user.displayName))
-          document.getElementById("content").innerText = JSON.stringify(data.result.user.displayName)
+          document.getElementById("content").innerText = data.result.user.displayName
         })
         .catch(function(err){
           console.log(err)
