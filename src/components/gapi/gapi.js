@@ -36,7 +36,7 @@
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.appdata';
+    var SCOPES = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.appdata';
 
     var authorizeButton = document.getElementById('authorize_button');
     var signoutButton = document.getElementById('signout_button');
@@ -56,7 +56,21 @@
         .catch(function(err){
           console.log(err)
         })
+        .then(listFiles())
     } 
+
+    function listFiles(){
+      window.gapi.client.request({
+          'path': 'https://www.googleapis.com/drive/v3/files',
+          'corpora': 'domain'
+        })
+          .then(function(data){
+            console.log(data, "is here")
+          })
+          .catch(function(err){
+            console.log(err)
+          })
+    }
 
     function handleClientLoad() {
       window.gapi.load('client:auth2', initClient);

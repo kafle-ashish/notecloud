@@ -3,15 +3,27 @@
 
 #authorize_button, #signout_button {
     display: block;
+    box-sizing: border-box;
     height: 30px;
-    width: 100px;
+    width: 30px;
     cursor: pointer;
-    background: white;
-    border: 1px solid #333;
     margin-left: auto;
     margin-right: 10px;
+    border-radius: 50%;
 }
 
 #authorize_button:hover, #signout_button:hover {
-    border: 2px solid #333;
+    border: 2px solid white;
+}
+
+.icon {
+    color: rgb(43, 152, 241);
+    width: 95%;
+    height: 95%;
+}
+
+.icon__red {
+    color: rgb(236, 23, 16);
+    width: 95%;
+    height: 95%;
 }

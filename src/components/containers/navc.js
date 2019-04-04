@@ -5,7 +5,6 @@ import './containers.css'
 import NavBar from '../navbar/navbar'
 import SignIn from '../signin/signin'
 
-
 const NavContainer = function(){
     return(
         <NavBar>
