@@ -29,6 +29,24 @@ code {
   display: flex;
   width: 100vw;
   height: 92vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
   justify-content: center;
   align-items: center;
+  width: 25vw;
+  height: 93vh;
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+  height: 93vh;
+  /* box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.1); */
 }

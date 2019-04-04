@@ -51,8 +51,7 @@
         'params':{fields: '*'}
       })
         .then(function(data){
-          console.log(JSON.stringify(data.result.user.displayName))
-          document.getElementById("content").innerText = data.result.user.displayName
+          document.getElementById("content").innerText = data.result.user.displayName.split(" ")[0]
         })
         .catch(function(err){
           console.log(err)
