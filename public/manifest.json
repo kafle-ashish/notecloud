@@ -1,6 +1,8 @@
+
+
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "NoteCloud",
+  "name": "NoteCloud: Notes in cloud.",
   "icons": [
     {
       "src": "favicon.ico",

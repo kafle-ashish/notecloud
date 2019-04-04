@@ -1,13 +1,13 @@
 
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import './menu.css'
 import { FaRegFileAlt as Files } from 'react-icons/fa'
 
 const Menu = function(){
     function toggleActive(e){
         for(let i=1; i<=4; i++){
-            if(i == e.currentTarget.id.split("-")[2]){
+            if(i.toString() === e.currentTarget.id.split("-")[2]){
                 e.currentTarget.classList.add("active__menu")
             }
             else{
@@ -18,11 +18,29 @@ const Menu = function(){
 
     function uploadFiles(){
         window.gapi.client.request({
-            'path': 'https://www.googleapis.com/upload/drive/v3/files',
+            'path': 'https://www.googleapis.com/drive/v3/files',
             'method': 'POST',
-            'params':{'q':{'uploadType': 'multipart'}},
+            'params':{'uploadType': 'multipart'},
             'body': {
-                "fileExtension": "txt",
+                "name": "testing.txt",
+                'parents': ["parent folder id goes here"],
+                'mimeType' : 'application/plain'
+            }
+          })
+            .then(function(data){
+              console.log(data, "is here")
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+    }
+
+    function createFolder(){
+        window.gapi.client.request({
+            'path': 'https://www.googleapis.com/drive/v3/files',
+            'method': 'POST',
+            'params':{'uploadType': 'multipart'},
+            'body': {
                 "name": "testing",
                 'mimeType' : 'application/vnd.google-apps.folder'
             }
