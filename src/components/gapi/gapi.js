@@ -50,7 +50,7 @@ function listFiles(){
 
 export const loadClientWhenGapiReady = function (script) {
   console.log('Trying To Load Client!');
-  console.log(script)
+  // console.log(script)
   if(script.getAttribute('gapi_processed')){
     console.log('Client is ready! Now you can access gapi. :)');
       window.gapi.client.init({
