@@ -2,6 +2,15 @@
 
 import React from 'react'
 import './menu.css'
+
+import {
+    uploadFiles,
+    // createFolder,
+    // getDriveInfo,
+    // listFiles,
+
+} from '../gapi/gapi'
+
 import { FaRegFileAlt as Files } from 'react-icons/fa'
 import { FaPlus as Plus } from 'react-icons/fa'
 import { FaMinus as Minus } from 'react-icons/fa'
@@ -9,54 +18,6 @@ import { MdRefresh as Refresh } from 'react-icons/md'
 import { MdCloudDownload as DownLoad } from 'react-icons/md'
 
 const Menu = function(){
-    function toggleActive(e){
-        for(let i=1; i<=4; i++){
-            if(i.toString() === e.currentTarget.id.split("-")[2]){
-                e.currentTarget.classList.add("active__menu")
-            }
-            else{
-                document.getElementById(`nav-menu-${i}`).classList.remove("active__menu")
-            }
-        }
-    }
-
-    function uploadFiles(){
-        window.gapi.client.request({
-            'path': 'https://www.googleapis.com/drive/v3/files',
-            'method': 'POST',
-            'params':{'uploadType': 'multipart'},
-            'body': {
-                "name": "testing.txt",
-                'parents': ["parent folder id goes here"],
-                'mimeType' : 'application/plain'
-            }
-          })
-            .then(function(data){
-              console.log(data, "is here")
-            })
-            .catch(function(err){
-              console.log(err)
-            })
-    }
-
-    function createFolder(){
-        window.gapi.client.request({
-            'path': 'https://www.googleapis.com/drive/v3/files',
-            'method': 'POST',
-            'params':{'uploadType': 'multipart'},
-            'body': {
-                "name": "testing",
-                'mimeType' : 'application/vnd.google-apps.folder'
-            }
-          })
-            .then(function(data){
-              console.log(data, "is here")
-            })
-            .catch(function(err){
-              console.log(err)
-            })
-    }
-
 
     return(
         <aside className="menu">
@@ -88,6 +49,17 @@ const Menu = function(){
             </div>
         </aside>
     )
+}
+
+function toggleActive(e){
+    for(let i=1; i<=4; i++){
+        if(i.toString() === e.currentTarget.id.split("-")[2]){
+            e.currentTarget.classList.add("active__menu")
+        }
+        else{
+            document.getElementById(`nav-menu-${i}`).classList.remove("active__menu")
+        }
+    }
 }
 
 export default Menu

@@ -15,9 +15,45 @@ var SCOPES = `https://www.googleapis.com/auth/drive \
  https://www.googleapis.com/auth/drive.appdata`
 // var authorizeButton = document.getElementById('authorize_button')
 // var signoutButton = document.getElementById('signout_button')
+export function uploadFiles(name="untitled", parentId){
+  window.gapi.client.request({
+      'path': 'https://www.googleapis.com/drive/v3/files',
+      'method': 'POST',
+      'params':{'uploadType': 'multipart'},
+      'body': {
+          "name": `${name}.txt`,
+          'parents': [`${parentId}`],
+          'mimeType' : 'application/plain'
+      }
+    })
+      .then(function(data){
+        console.log(data, "is here")
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+}
 
+export function createFolder(name){
+  console.log("here")
+  window.gapi.client.request({
+      'path': 'https://www.googleapis.com/drive/v3/files',
+      'method': 'POST',
+      'params':{'uploadType': 'multipart'},
+      'body': {
+          "name": `${name}`,
+          'mimeType' : 'application/vnd.google-apps.folder'
+      }
+    })
+      .then(function(data){
+        return data
+      })
+      .catch(function(err){
+        return err
+      })
+}
 
-function getDriveInfo() {
+export function getDriveInfo() {
   window.gapi.client.request({
     'path': 'https://www.googleapis.com/drive/v3/about',
     'params':{fields: '*'}
@@ -28,20 +64,19 @@ function getDriveInfo() {
     .catch(function(err){
       console.log(err)
     })
-    .then(listFiles())
 } 
 
-function listFiles(){
+export function listFiles(callback){
   window.gapi.client.request({
     'path': 'https://www.googleapis.com/drive/v3/files',
     'params':{'corpora': 'user'}
   })  
   .then(function(data){
     data.result.files.forEach(element => {
-        if(element.name === 'testing' && element.mimeType === 'application/vnd.google-apps.folder'){
-          console.log(element.id, "is here")
+        if(element.name === 'notecloud' && element.mimeType === 'application/vnd.google-apps.folder'){
+          callback(element.id)
         }
-    });
+    })
   })
   .catch(function(err){
     console.log(err)
@@ -52,7 +87,7 @@ export const loadClientWhenGapiReady = function (script) {
   console.log('Trying To Load Client!');
   // console.log(script)
   if(script.getAttribute('gapi_processed')){
-    console.log('Client is ready! Now you can access gapi. :)');
+      console.log('Client is ready! Now you can access gapi. :)');
       window.gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
@@ -66,9 +101,19 @@ export const loadClientWhenGapiReady = function (script) {
           updateSigninStatus(window.gapi.auth2.getAuthInstance().isSignedIn.get());
           document.getElementById('authorize_button').onclick = handleAuthClick;
           document.getElementById('signout_button').onclick = handleSignoutClick;
+          listFiles(
+            function(id){
+              if(id===null || id===undefined){
+                let res = createFolder("notecloud")
+                console.log(res)
+              }
+              else
+              console.log(id, "fooumd")
+              }
+          )
         }, function(error) {
           appendPre(JSON.stringify(error, null, 2));
-        });
+        })
     }
   else{
     console.log('Client wasn\'t ready, trying again in 100ms');
