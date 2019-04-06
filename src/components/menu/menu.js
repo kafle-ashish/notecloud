@@ -20,12 +20,11 @@ import { MdFolder as Folder } from "react-icons/md"
 import { MdModeEdit as Rename } from "react-icons/md";
 
 
-const Menu = function(){
+const Menu = function(props){
     function fileName(e){
-        // console.log(id)
         if(e.key === 'Enter'){
-        console.log(e.currentTarget.value.replace(" ", ""))
-        // uploadFiles(e.currentTarget.value.replace(" ", ""), id)
+        // console.log(e.currentTarget.value.replace(" ", ""))
+        uploadFiles(e.currentTarget.value.replace(" ", ""), props.rootId)
         document.getElementById("new__file").style.display = `none`
         }
     }

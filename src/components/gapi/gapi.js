@@ -72,18 +72,38 @@ export function listFiles(callback){
     'params':{'corpora': 'user'}
   })  
   .then(function(data){
+    let id
     data.result.files.forEach(element => {
         if(element.name === 'notecloud' && element.mimeType === 'application/vnd.google-apps.folder'){
+          id = element.id
           callback(element.id)
         }
     })
+    if(id === undefined)
+      createFolder("notecloud")
+  
   })
   .catch(function(err){
     console.log(err)
   })
 }
 
-export const loadClientWhenGapiReady = function (script) {
+export function listFolder(id){
+  window.gapi.client.request({
+    'path': 'https://www.googleapis.com/drive/v3/files',
+    'params':{'corpora': 'user',
+    'q': `${id}+in+parents`
+  }
+  })  
+  .then(function(data){
+    console.log(data)
+  })
+  .catch(function(err){
+    console.log(err)
+  })
+}
+
+export const loadClientWhenGapiReady = function (script, callback) {
   console.log('Trying To Load Client!');
   // console.log(script)
   if(script.getAttribute('gapi_processed')){
@@ -103,11 +123,14 @@ export const loadClientWhenGapiReady = function (script) {
           document.getElementById('signout_button').onclick = handleSignoutClick;
           listFiles(
             function(id){
+              console.log("here", id)
               if(id===null || id===undefined){
                 createFolder("notecloud")
               }
-              else
+              else{
+                callback(id)
                 return id
+              }
               }
           )
         }, function(error) {
@@ -116,7 +139,7 @@ export const loadClientWhenGapiReady = function (script) {
     }
   else{
     console.log('Client wasn\'t ready, trying again in 100ms');
-    setTimeout(() => {loadClientWhenGapiReady(script)}, 100);
+    setTimeout(() => {loadClientWhenGapiReady(script, callback)}, 100);
   }
 }
 /**
@@ -131,12 +154,14 @@ export const loadClientWhenGapiReady = function (script) {
  *  Initializes the API client library and sets up sign-in state
  *  listeners.
  */
-export function initClient() {
+
+ let ID
+export function initClient(callback) {
     const script = document.createElement("script");
     script.onload = () => {
     console.log('Loaded script, now loading our api...')
     // Gapi isn't available immediately so we have to wait until it is to use gapi.
-    loadClientWhenGapiReady(script);
+    loadClientWhenGapiReady(script, callback);
     };
     script.src = "https://apis.google.com/js/client.js";
     document.body.appendChild(script);
