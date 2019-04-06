@@ -86,3 +86,36 @@
   .actions:hover {
     border-color: rgb(185, 185, 185);
   }
+
+  .file__root {
+      user-select: none;
+      display: flex;
+      color: rgb(46, 35, 35);
+      border-bottom: 1px solid rgb(228, 228, 228);
+      padding: 2px 4px;
+      font-size: 14px;
+      font-weight: 500;
+      align-items: center;
+      cursor: pointer;
+  }
+
+  .file__root, .file__root * {
+    transition: 0.2s ease-in-out;
+  }
+
+  .file__root:hover {
+      border-color: rgb(185, 185, 185);
+  }
+
+  .file__root:hover .actions__icons{
+      color: rgb(0, 140, 255);
+  }
+
+  .files {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 13px;
+      user-select: none;
+      cursor: pointer;
+  }

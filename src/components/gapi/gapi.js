@@ -104,11 +104,10 @@ export const loadClientWhenGapiReady = function (script) {
           listFiles(
             function(id){
               if(id===null || id===undefined){
-                let res = createFolder("notecloud")
-                console.log(res)
+                createFolder("notecloud")
               }
               else
-              console.log(id, "fooumd")
+                return id
               }
           )
         }, function(error) {
