@@ -118,4 +118,20 @@
       font-size: 13px;
       user-select: none;
       cursor: pointer;
+      margin-top: 5px;
+      /* border-top: 1px solid rgb(228, 228, 228); */
+  }
+
+  .file__content {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      padding-left: 10px;
+      border-bottom: 1px solid rgb(228, 228, 228);
+      color: rgb(46, 35, 35);
+  }
+
+  .file__content:hover{
+      border-color: rgb(247, 247, 247);
+      background: rgb(247, 247, 247);
   }

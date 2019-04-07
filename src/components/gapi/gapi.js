@@ -69,7 +69,8 @@ export function getDriveInfo() {
 export function listFiles(callback){
   window.gapi.client.request({
     'path': 'https://www.googleapis.com/drive/v3/files',
-    'params':{'corpora': 'user'}
+    'params':{'corpora': 'user'},
+    'fields': "nextPageToken, files(id, name, mimeType)"
   })  
   .then(function(data){
     let id
@@ -88,18 +89,16 @@ export function listFiles(callback){
   })
 }
 
-export function listFolder(id){
+export function listFolder(id, filesCallback){
   window.gapi.client.request({
-    'path': 'https://www.googleapis.com/drive/v3/files',
-    'params':{'corpora': 'user',
-    'q': `${id}+in+parents`
-  }
+    'path': `https://www.googleapis.com/drive/v3/files?q='${id}'+in+parents`,
+    'params':{'corpora': 'user'}
   })  
   .then(function(data){
-    console.log(data)
+    return filesCallback(data)
   })
   .catch(function(err){
-    console.log(err)
+    return filesCallback(err)
   })
 }
 

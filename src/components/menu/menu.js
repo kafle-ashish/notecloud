@@ -18,6 +18,7 @@ import { MdRefresh as Refresh } from 'react-icons/md'
 import { MdCloudDownload as DownLoad } from 'react-icons/md'
 import { MdFolder as Folder } from "react-icons/md"
 import { MdModeEdit as Rename } from "react-icons/md";
+import { MdInsertDriveFile as File } from "react-icons/md";
 
 
 const Menu = function(props){
@@ -28,6 +29,26 @@ const Menu = function(props){
         document.getElementById("new__file").style.display = `none`
         }
     }
+
+    let explorerFiles = (
+    props.files.length !== 0 ? 
+        props.files.map((file)=>(
+           <div className="file__content">
+            <File />
+            <span style={{marginLeft:`5px`}}>{file.name.split('.txt')[0]}</span>
+            </div>
+        ))
+    :
+    <div>Empty</div>
+    )
+      
+
+    const input = (<input id="new__file" 
+                    type="text" style={{display:`none`}} 
+                    // onChange={fileName}
+                    onKeyPress={fileName} 
+                    placeholder="file name"/>
+                    )
 
     return(
         <aside className="menu">
@@ -62,13 +83,7 @@ const Menu = function(props){
                         <Folder className="actions__icons"/>
                         <span style={{padding:`0px 8px`}}>notecloud</span>
                     </div>
-                    <div className="files" id="files__holder">
-                    <input id="new__file" 
-                        type="text" style={{display:`none`}} 
-                        // onChange={fileName}
-                        onKeyPress={fileName} 
-                        placeholder="file name"/>
-                    </div>
+                        <div className="files" id="files__holder">{input}{explorerFiles}</div>
                 </div>
             </div>
         </aside>
