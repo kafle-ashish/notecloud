@@ -1,0 +1,35 @@
+
+
+.vetical__menu {
+    all: unset;
+    width: 60px;
+    height: 100%;
+    box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+    background: rgb(0, 140, 255);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu__btn {
+    display: block;
+    box-sizing: border-box;
+    padding: 2px;
+    height: 60px;
+    width: 100%;
+    border-bottom: 2px solid rgb(0, 140, 255);
+    /* border-bottom: 2px solid rgb(255, 255, 255); */
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.menu__btn:hover{
+    border-color: rgb(255, 255, 255);
+}
+
+.active__menu{
+  border-color: rgb(106, 180, 240);
+}
+

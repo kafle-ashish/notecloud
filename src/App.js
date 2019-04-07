@@ -29,7 +29,7 @@ function App() {
             setFiles(JSON.parse(data.body).files)
             console.log(files ,JSON.parse(data.body).files)
           }
-          else console.log("File is same")
+          // else console.log("File is same")
         })
       }
     })

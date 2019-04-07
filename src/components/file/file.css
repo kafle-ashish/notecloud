@@ -1,0 +1,56 @@
+
+
+.file__manager{
+    width: 100%;
+    height: 400px;
+    /* background-color: red; */
+}
+
+.file__root {
+    user-select: none;
+    display: flex;
+    color: rgb(46, 35, 35);
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding: 2px 4px;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+    cursor: pointer;
+}
+
+.file__root, .file__root * {
+  transition: 0.2s ease-in-out;
+}
+
+.file__root:hover {
+    border-color: rgb(185, 185, 185);
+}
+
+.file__root:hover .actions__icons{
+    color: rgb(0, 140, 255);
+}
+
+.files {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    user-select: none;
+    cursor: pointer;
+    margin-top: 5px;
+    /* border-top: 1px solid rgb(228, 228, 228); */
+}
+
+.file__content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-left: 10px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    color: rgb(46, 35, 35);
+}
+
+.file__content:hover{
+    border-color: rgb(247, 247, 247);
+    background: rgb(247, 247, 247);
+}
