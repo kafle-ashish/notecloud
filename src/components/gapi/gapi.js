@@ -120,6 +120,7 @@ export const loadClientWhenGapiReady = function (script, callback) {
           updateSigninStatus(window.gapi.auth2.getAuthInstance().isSignedIn.get());
           document.getElementById('authorize_button').onclick = handleAuthClick;
           document.getElementById('signout_button').onclick = handleSignoutClick;
+          document.getElementById("loader").style.display = `none`
           listFiles(
             function(id){
               console.log("here", id)
@@ -133,6 +134,7 @@ export const loadClientWhenGapiReady = function (script, callback) {
               }
           )
         }, function(error) {
+          document.getElementById("loader").style.display = `none`
           appendPre(JSON.stringify(error, null, 2));
         })
     }

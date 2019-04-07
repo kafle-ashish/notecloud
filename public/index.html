@@ -23,10 +23,61 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>NoteCloud</title>
-  </head>
+    <style>
+        #loader{
+          width: 100vw;
+          height: 100vh;
+          position: absolute;
+          top: 0;
+          z-index: 11111;
+          background: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        #spinner {
+          display: block;
+          background: blue;
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          animation: pulse 1s linear infinite;
+        }
+
+        @keyframes pulse {
+          0%{
+            width: 100px;
+            height: 100px;
+            background: rgb(38, 38, 247);
+          }
+          25%{
+            width: 150px;
+            height: 150px;
+            background: rgb(100, 100, 231);
+          }
+          50%{
+            width: 200px;
+            height: 200px;
+            background: blue;
+          }
+          75%{
+            width: 100px;
+            height: 100px;
+            background: rgb(82, 82, 245);
+          }
+          100%{
+            width: 100px;
+            height: 100px;
+            background: rgb(38, 38, 247);
+          }
+        }
+      </style>
+    </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="loader"><div id="spinner"></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -37,5 +88,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+    </script>
   </body>
 </html>
