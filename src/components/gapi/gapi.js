@@ -1,37 +1,33 @@
 
 
-var API_KEY = 'AIzaSyDwZ3O-cuY9gdwkqy4MqkQ87TgB_Lc4VTs'
-var CLIENT_ID = '213089667901-m0grm3rs81m7vgvqo1bvjd6k4b9u0oqd.apps.googleusercontent.com'
-// Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
-                     "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
-// Authorization scopes required by the API multiple scopes can be
-// included, separated by spaces.
-var SCOPES = `https://www.googleapis.com/auth/drive \
- https://www.googleapis.com/auth/gmail.readonly \
- https://www.googleapis.com/auth/drive.appfolder \
- https://www.googleapis.com/auth/drive.install \
- https://www.googleapis.com/auth/drive.appdata \
- https://www.googleapis.com/auth/drive.appdata`
-// var authorizeButton = document.getElementById('authorize_button')
-// var signoutButton = document.getElementById('signout_button')
+const API_KEY = 'AIzaSyDwZ3O-cuY9gdwkqy4MqkQ87TgB_Lc4VTs',
+    CLIENT_ID = '213089667901-m0grm3rs81m7vgvqo1bvjd6k4b9u0oqd.apps.googleusercontent.com',
+    DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+                     "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+    SCOPES = `https://www.googleapis.com/auth/drive \
+              https://www.googleapis.com/auth/gmail.readonly \
+              https://www.googleapis.com/auth/drive.appfolder \
+              https://www.googleapis.com/auth/drive.install \
+              https://www.googleapis.com/auth/drive.appdata \
+              https://www.googleapis.com/auth/drive.appdata`
+
 export function uploadFiles(name="untitled", parentId){
   window.gapi.client.request({
-      'path': 'https://www.googleapis.com/drive/v3/files',
-      'method': 'POST',
-      'params':{'uploadType': 'multipart'},
-      'body': {
-          "name": `${name}.txt`,
-          'parents': [`${parentId}`],
-          'mimeType' : 'application/plain'
-      }
-    })
-      .then(function(data){
-        console.log(data, "is here")
-      })
-      .catch(function(err){
-        console.log(err)
-      })
+    'path': 'https://www.googleapis.com/drive/v3/files',
+    'method': 'POST',
+    'params':{'uploadType': 'multipart'},
+    'body': {
+        "name": `${name}.txt`,
+        'parents': [`${parentId}`],
+        'mimeType' : 'application/plain'
+    }
+  })
+  .then(function(data){
+    console.log(data, "is here")
+  })
+  .catch(function(err){
+    console.log(err)
+  })
 }
 
 export function createFolder(name){
@@ -45,12 +41,12 @@ export function createFolder(name){
           'mimeType' : 'application/vnd.google-apps.folder'
       }
     })
-      .then(function(data){
-        return data
-      })
-      .catch(function(err){
-        return err
-      })
+    .then(function(data){
+      return data
+    })
+    .catch(function(err){
+      return err
+    })
 }
 
 export function getDriveInfo() {
@@ -143,20 +139,12 @@ export const loadClientWhenGapiReady = function (script, callback) {
     setTimeout(() => {loadClientWhenGapiReady(script, callback)}, 100);
   }
 }
-/**
- *  On load, called to load the auth2 library and API client library.
- */
 
 // function handleClientLoad() {
 //     window.gapi.load('client:auth2', initClient);
 // }
 
-/**
- *  Initializes the API client library and sets up sign-in state
- *  listeners.
- */
-
- let ID
+let ID
 export function initClient(callback) {
     const script = document.createElement("script");
     script.onload = () => {
@@ -177,57 +165,41 @@ function updateSigninStatus(isSignedIn) {
     document.getElementById('authorize_button').style.display = 'none';
     document.getElementById('signout_button').style.display = 'block';
     getDriveInfo()
-    listLabels();
   } else {
+    document.getElementById("sign__in__card").style.display = 'flex'
     document.getElementById('authorize_button').style.display = 'block';
     document.getElementById('signout_button').style.display = 'none';
   }
 }
 
-/**
- *  Sign in the user upon button click.
- */
-function handleAuthClick(event) {
+export function handleAuthClick(event) {
   window.gapi.auth2.getAuthInstance().signIn();
 }
 
-/**
- *  Sign out the user upon button click.
- */
 function handleSignoutClick(event) {
   window.gapi.auth2.getAuthInstance().signOut();
 }
 
-/**
- * Append a pre element to the body containing the given message
- * as its text node. Used to display the results of the API call.
- *
- * @param {string} message Text to be placed in pre element.
- */
 function appendPre(message) {
   var pre = document.getElementById('content');
   var textContent = document.createTextNode(message + '\n');
   pre.appendChild(textContent);
 }
 
-/**
- * Print all Labels in the authorized user's inbox. If no labels
- * are found an appropriate message is printed.
- */
 function listLabels() {
   window.gapi.client.gmail.users.labels.list({
     'userId': 'me'
   }).then(function(response) {
     var labels = response.result.labels;
-    appendPre('Labels:');
+    // appendPre('Labels:');
 
     if (labels && labels.length > 0) {
       for (var i = 0; i < labels.length; i++) {
         var label = labels[i];
-        appendPre(label.name)
+        // appendPre(label.name)
       }
     } else {
-      appendPre('No Labels found.');
+      // appendPre('No Labels found.');
     }
   });
 }

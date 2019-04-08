@@ -8,6 +8,7 @@ import { uploadFiles,
     // listFiles,
 } from '../gapi/gapi'
 import { MdFolder as Folder, MdInsertDriveFile as File} from "react-icons/md";
+import SignInCard from '../signInCard/signInCard';
 
 const FileManager = function(props){
     function populateFiles(){
@@ -28,7 +29,9 @@ const FileManager = function(props){
                     <File />
                     <span style={{marginLeft:`5px`}}>{file.name.split('.txt')[0]}</span>
                 </div>
-            )):<div>Empty</div>
+            )): <div id="signin__c">
+                    <SignInCard/>
+                </div>
         )
           
     const input = (<input id="new__file" type="text" style={{display:`none`}} 
