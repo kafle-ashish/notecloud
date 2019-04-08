@@ -9,7 +9,7 @@ import FileManager from '../file/file'
 
 const Menu = function(props){
     return(
-        <aside className="menu">
+        <aside id="__menu" className="menu">
             <Vmenu/>
             <div className="menu__content">
                 <QMenu/>

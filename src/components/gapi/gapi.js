@@ -144,7 +144,6 @@ export const loadClientWhenGapiReady = function (script, callback) {
 //     window.gapi.load('client:auth2', initClient);
 // }
 
-let ID
 export function initClient(callback) {
     const script = document.createElement("script");
     script.onload = () => {
@@ -186,7 +185,7 @@ function appendPre(message) {
   pre.appendChild(textContent);
 }
 
-function listLabels() {
+/* function listLabels() {
   window.gapi.client.gmail.users.labels.list({
     'userId': 'me'
   }).then(function(response) {
@@ -203,3 +202,4 @@ function listLabels() {
     }
   });
 }
+*/

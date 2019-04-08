@@ -12,7 +12,7 @@ import SignInCard from '../signInCard/signInCard';
 
 const FileManager = function(props){
     function populateFiles(){
-        document.getElementById("files__holder").innerHTML = 'Hola'
+        // document.getElementById("files__holder").innerHTML = 'Hola'
     }
 
     function fileName(e){
