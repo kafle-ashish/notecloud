@@ -38,10 +38,6 @@ code {
     display: none;
   }
 
-  .content{
-    width: 100vw !important;
-  }
-
   .ham__menu{
     box-sizing: border-box;
     display: inline-block !important;
