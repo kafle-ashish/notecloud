@@ -18,7 +18,7 @@
       border-radius: 3px;
   }
 
-  .editor{
+  .editor, .ck-editor{
     width: 98% !important;
     height: 82vh !important;
     background: white !important;
@@ -26,6 +26,10 @@
     font-size: 12px !important;
     letter-spacing: 1px !important;
     overflow: auto;
+  }
+
+  .ck-content{
+    height: 75vh !important;
   }
 
 
