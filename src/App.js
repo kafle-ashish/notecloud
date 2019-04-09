@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import NavContainer from './components/containers/navc'
 import Menu from './components/menu/menu'
-import Editor from './components/editor/editor'
+import EditorDraft from './components/editor/editor'
 import { listFolder, initClient as loader } from './components/gapi/gapi'
 
 export default function App() {
@@ -28,7 +28,7 @@ export default function App() {
       <NavContainer/>
       <div className="body">
         <Menu rootId={rootId} files={files}/>
-        <Editor/>
+        <EditorDraft/>
       </div>
     </div>
   )

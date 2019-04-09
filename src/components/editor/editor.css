@@ -18,24 +18,19 @@
       border-radius: 3px;
   }
 
-  .ck-editor{
+  .editor{
     width: 98% !important;
     height: 82vh !important;
     background: white !important;
     box-sizing: border-box !important;
     font-size: 12px !important;
     letter-spacing: 1px !important;
+    overflow: auto;
   }
 
-  .ck-editor__main, .ck-editor__editable{
-      height: 78vh !important;
-  }
 
   @media only screen and (max-width:768px){
     .content{
         width: 100%;
       }
-      .ck-editor__main, .ck-editor__editable{
-        height:91% !important;
-    }
   }
