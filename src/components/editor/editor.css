@@ -19,17 +19,41 @@
   }
 
   .editor, .ck-editor{
+    background: red !important;
     width: 98% !important;
-    height: 82vh !important;
+    /* height: 82vh !important; */
     background: white !important;
     box-sizing: border-box !important;
     font-size: 12px !important;
     letter-spacing: 1px !important;
     overflow: auto;
+    font-family: inherit !important;
   }
 
   .ck-content{
     height: 75vh !important;
+  }
+
+  .ce-block__content, .ce-block {
+    max-width:  inherit !important;
+  }
+
+  .ce-toolbar__content{
+    max-width: 90% !important;
+  }
+
+  .ce-block__content{
+      margin-top: 20px;
+  }
+
+  .ce-toolbar__plus{
+    
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+    color: #333 !important;
   }
 
 
