@@ -10,6 +10,8 @@ import { listFolder, initClient as loader } from './components/gapi/gapi'
 export default function App() {
   let [ rootId, setRootId ] = useState(null)
   let [files, setFiles ] = useState([])
+  let [ activeId, setActiveId ] = useState(null)
+  let [ activeContent, setActiveContent ] = useState('Edit and start taking notes now.')
 
   useEffect(function(){
     loader(function(rootid){
@@ -24,7 +26,8 @@ export default function App() {
   }, [rootId])
 
   const setTextEditor = (fileId, fileContent) => {
-    console.log(fileId, 'loaded with', fileContent)
+    setActiveId(fileId)
+    setActiveContent(fileContent)
   }
 
   return (
@@ -32,7 +35,7 @@ export default function App() {
       <NavContainer/>
       <div className="body">
         <Menu rootId={rootId} files={files} setTextEditor={setTextEditor}/>
-        <EditorDraft/>
+        <EditorDraft fileId={activeId} content={activeContent}/>
       </div>
     </div>
   )

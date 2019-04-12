@@ -4,16 +4,15 @@ import React, { useState, useEffect } from 'react'
 import './editor.css'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { FaRegSave as Save } from 'react-icons/fa'
 
-export default function EditorDraft(){
-
-    let [editorState, setEditorState] = useState('Start taking notes now.')
+export default function EditorDraft(props){
+    let [editorState, setEditorState] = useState(props.content)
+    let [editorId, setEditorId] = useState(props.fileId)
     let editorG
-    
+
     function onEditorChange ( event, editor ){
         const data = editor.getData()
-        if(data %150 === 0){
+        if(data %150 === 0 && data.length !== 0){
             console.log( { event, editor, data } )
             setEditorState(data)
         }
@@ -22,6 +21,15 @@ export default function EditorDraft(){
     function saveEditorData(){
         console.log("data is", editorG.getData())
     }
+
+    useEffect(function(){
+        if(props.content !== editorState){
+            setEditorState(props.content)
+        }
+        if(props.id !== editorId){
+            setEditorId(props.fileId)
+        }
+    }, [props.content, props.fileId])
 
     useEffect(function(){
         let data = `
@@ -44,8 +52,8 @@ export default function EditorDraft(){
         document.getElementById('save__data').addEventListener('click', saveEditorData)
     }, [])
 
-    const onBlur =  editor => {console.log( 'Blur.', editor )}
-    const onFocused = editor => {console.log( 'Focus.', editor )}
+    // const onBlur =  editor => {console.log( 'Blur.', editor )}
+    // const onFocused = editor => {console.log( 'Focus.', editor )}
     function init(editor){
         editorG = editor
     }
@@ -58,8 +66,8 @@ export default function EditorDraft(){
                     data={ editorState }
                     onInit={ init }
                     onChange={ onEditorChange }
-                    onBlur={ onBlur }
-                    onFocus={ onFocused }
+                    // onBlur={ onBlur }
+                    // onFocus={ onFocused }
                 />
         </section>
     )
