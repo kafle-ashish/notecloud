@@ -31,7 +31,6 @@ export function uploadFiles(name="untitled", parentId){
 }
 
 export function createFolder(name){
-  console.log("here")
   window.gapi.client.request({
       'path': 'https://www.googleapis.com/drive/v3/files',
       'method': 'POST',
@@ -52,7 +51,7 @@ export function createFolder(name){
 export function getDriveInfo() {
   window.gapi.client.request({
     'path': 'https://www.googleapis.com/drive/v3/about',
-    'params':{fields: '*'}
+    'params':{'fields': '*'}
   })
     .then(function(data){
       document.getElementById("content").innerText = data.result.user.displayName.split(" ")[0]
@@ -73,10 +72,11 @@ export function listFiles(callback){
     data.result.files.forEach(element => {
         if(element.name === 'notecloud' && element.mimeType === 'application/vnd.google-apps.folder'){
           id = element.id
+          console.log("found root folder ....")
           callback(element.id)
         }
     })
-    if(id === undefined)
+    if(id === undefined || id === null)
       createFolder("notecloud")
   
   })
@@ -96,6 +96,15 @@ export function listFolder(id, filesCallback){
   .catch(function(err){
     return filesCallback(err)
   })
+}
+
+export function getFileContents(id, loadFileCallback){
+  window.gapi.client.request({
+    'path': `https://www.googleapis.com/drive/v3/files/${id}`,
+    'params': {'alt':'media'}
+  })
+  .then(data=> {loadFileCallback(id, data.body)})
+  .catch(err=>{return err})
 }
 
 export const loadClientWhenGapiReady = function (script, callback) {

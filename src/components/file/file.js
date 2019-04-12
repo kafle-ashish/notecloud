@@ -2,11 +2,7 @@
 
 import React from 'react'
 import './file.css'
-import { uploadFiles,
-    // createFolder,
-    // getDriveInfo,
-    // listFiles,
-} from '../gapi/gapi'
+import { uploadFiles, getFileContents } from '../gapi/gapi'
 import { MdFolder as Folder, MdInsertDriveFile as File} from "react-icons/md";
 import SignInCard from '../signInCard/signInCard';
 
@@ -23,9 +19,17 @@ const FileManager = function(props){
         }
     }
 
+    const loadFileCallback = (fileId, fileContent) => {
+        props.setTextEditor(fileId, fileContent)
+    }
+
+    const loadFile = e => {
+        getFileContents(e.currentTarget.id, loadFileCallback)
+    }
+
     const explorerFiles = (
         props.files.length !== 0 ? props.files.map((file)=>(
-               <div className="file__content">
+               <div className="file__content" id={file.id} key={file.id} onClick={loadFile}>
                     <File />
                     <span style={{marginLeft:`5px`}}>{file.name.split('.txt')[0]}</span>
                 </div>

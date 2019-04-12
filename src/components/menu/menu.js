@@ -13,7 +13,7 @@ const Menu = function(props){
             <Vmenu/>
             <div className="menu__content">
                 <QMenu/>
-                <FileManager files={props.files}/>
+                <FileManager files={props.files} setTextEditor={props.setTextEditor}/>
             </div>
         </aside>
     )

@@ -21,13 +21,17 @@ export default function App() {
         })
       }
     })
-  })
+  }, [rootId])
+
+  const setTextEditor = (fileId, fileContent) => {
+    console.log(fileId, 'loaded with', fileContent)
+  }
 
   return (
     <div className="container">
       <NavContainer/>
       <div className="body">
-        <Menu rootId={rootId} files={files}/>
+        <Menu rootId={rootId} files={files} setTextEditor={setTextEditor}/>
         <EditorDraft/>
       </div>
     </div>
