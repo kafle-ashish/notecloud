@@ -5,22 +5,28 @@ import './file.css'
 import { uploadFiles, getFileContents } from '../gapi/gapi'
 import { MdFolder as Folder, MdInsertDriveFile as File} from "react-icons/md";
 import SignInCard from '../signInCard/signInCard';
+import { useStore } from '../../global'
 
-const FileManager = function(props){
+const FileManager = function(){
+    let files = useStore(state => state.files)
+    let rootId  = useStore(state => state.rootId)
+    let { setActiveId, setActiveContent } = useStore(state => state.actions)
+
     function populateFiles(){
         // document.getElementById("files__holder").innerHTML = 'Hola'
     }
 
     function fileName(e){
         if(e.key === 'Enter'){
-            // console.log(e.currentTarget.value.replace(" ", ""))
-            uploadFiles(e.currentTarget.value.replace(" ", ""), props.rootId)
+            // console.log(e.currentTarget.value.replace(" ", ""), rootId)
+            uploadFiles(e.currentTarget.value.replace(" ", ""), rootId)
             document.getElementById("new__file").style.display = `none`
         }
     }
 
     const loadFileCallback = (fileId, fileContent) => {
-        props.setTextEditor(fileId, fileContent)
+        setActiveId(fileId)
+        setActiveContent(fileContent)
     }
 
     const loadFile = e => {
@@ -28,7 +34,7 @@ const FileManager = function(props){
     }
 
     const explorerFiles = (
-        props.files.length !== 0 ? props.files.map((file)=>(
+        files.length !== 0 ? files.map((file)=>(
                <div className="file__content" id={file.id} key={file.id} onClick={loadFile}>
                     <File />
                     <span style={{marginLeft:`5px`}}>{file.name.split('.txt')[0]}</span>

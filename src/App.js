@@ -1,21 +1,24 @@
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import NavContainer from './components/containers/navc'
 import Menu from './components/menu/menu'
 import EditorDraft from './components/editor/editor'
 import { listFolder, initClient as loader } from './components/gapi/gapi'
+import { useStore } from './global'
 
 export default function App() {
-  let [ rootId, setRootId ] = useState(null)
-  let [files, setFiles ] = useState([])
-  let [ activeId, setActiveId ] = useState(null)
-  let [ activeContent, setActiveContent ] = useState('Edit and start taking notes now.')
+  let rootId  = useStore(state => state.rootId)
+  let files = useStore(state => state.files)
+  // let activeId = useState(state => state.activeId)
+  let { setRootId, setFiles } = useStore(state => state.actions)
 
   useEffect(function(){
+    
     loader(function(rootid){
       setRootId(rootid)
+      console.log(rootId, "[[[[[[[[[[[[[[[[[[[[")
       if(rootId !== null){
         listFolder(rootId, function(data){
           if(files.length !== JSON.parse(data.body).files.length)
@@ -25,17 +28,12 @@ export default function App() {
     })
   }, [rootId])
 
-  const setTextEditor = (fileId, fileContent) => {
-    setActiveId(fileId)
-    setActiveContent(fileContent)
-  }
-
   return (
     <div className="container">
       <NavContainer/>
       <div className="body">
-        <Menu rootId={rootId} files={files} setTextEditor={setTextEditor}/>
-        <EditorDraft fileId={activeId} content={activeContent}/>
+        <Menu/>
+        <EditorDraft/>
       </div>
     </div>
   )

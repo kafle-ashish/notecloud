@@ -2,16 +2,31 @@
 
 const API_KEY = 'AIzaSyDwZ3O-cuY9gdwkqy4MqkQ87TgB_Lc4VTs',
     CLIENT_ID = '213089667901-m0grm3rs81m7vgvqo1bvjd6k4b9u0oqd.apps.googleusercontent.com',
-    DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
-                     "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+    DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
     SCOPES = `https://www.googleapis.com/auth/drive \
-              https://www.googleapis.com/auth/gmail.readonly \
               https://www.googleapis.com/auth/drive.appfolder \
               https://www.googleapis.com/auth/drive.install \
               https://www.googleapis.com/auth/drive.appdata \
               https://www.googleapis.com/auth/drive.appdata`
 
+export function updateFiles(id, content){
+  console.log(id)
+  window.gapi.client.request({
+    'path': 'https://www.googleapis.com/upload/drive/v3/files/fileId',
+    'method': 'PATCH',
+    'params': {'uploadType': 'multipart', 'fileId':id},
+    'body': {
+      'mimeType': 'application/plain',
+      'data': content
+    }
+
+  })
+  .then(data => {console.log(data)})
+  .catch(err => {console.log(err)})
+}
+
 export function uploadFiles(name="untitled", parentId){
+  // console.log(name, parentId)
   window.gapi.client.request({
     'path': 'https://www.googleapis.com/drive/v3/files',
     'method': 'POST',
@@ -103,7 +118,8 @@ export function getFileContents(id, loadFileCallback){
     'path': `https://www.googleapis.com/drive/v3/files/${id}`,
     'params': {'alt':'media'}
   })
-  .then(data=> {loadFileCallback(id, data.body)})
+  .then(data=> {
+    loadFileCallback(id, JSON.parse(data.body).data)})
   .catch(err=>{return err})
 }
 
@@ -128,7 +144,7 @@ export const loadClientWhenGapiReady = function (script, callback) {
           document.getElementById("loader").style.display = `none`
           listFiles(
             function(id){
-              console.log("here", id)
+              // console.log("here", id)
               if(id===null || id===undefined){
                 createFolder("notecloud")
               }

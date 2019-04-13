@@ -1,16 +1,18 @@
 
 
-import React from 'react'
+import create from 'zustand'
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'UPDATE':
-      return { id: action.id}
-    default:
-      return state
-  }
-}
-
-export default reducer
+export const [ useStore ] = create(set => ({
+  rootId:null,
+  activeId:null,
+  activeContent: "Edit and start taking notes now.",
+  files:[],
+  actions: {
+    setActiveId: activeId => set(() => ({ activeId: activeId })),
+    setActiveContent: data => set(() => ({ activeContent: data })),
+    setRootId: rootid => set( () => ({rootId: rootid})),
+    setFiles: files => set( () => ({files:files})),
+  },
+}))
 
   
