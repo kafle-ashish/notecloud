@@ -33,19 +33,21 @@
 .files {
     display: flex;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    width: inherit;
     font-size: 13px;
     user-select: none;
     cursor: pointer;
     margin-top: 5px;
+    flex-direction: column;
     /* border-top: 1px solid rgb(228, 228, 228); */
 }
 
 .file__content {
     display: flex;
-    width: 100%;
+    width: 99%;
     align-items: center;
-    padding-left: 10px;
+    margin-left: 1%;
     border-bottom: 1px solid rgb(228, 228, 228);
     color: rgb(46, 35, 35);
 }

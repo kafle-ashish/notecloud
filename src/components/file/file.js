@@ -25,6 +25,7 @@ const FileManager = function(){
     }
 
     const loadFileCallback = (fileId, fileContent) => {
+        console.log(fileContent)
         setActiveId(fileId)
         setActiveContent(fileContent)
     }

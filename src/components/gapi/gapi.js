@@ -119,7 +119,9 @@ export function getFileContents(id, loadFileCallback){
     'params': {'alt':'media'}
   })
   .then(data=> {
-    loadFileCallback(id, JSON.parse(data.body).data)})
+    console.log(id, data)
+    loadFileCallback(id, data.body === ''?'':JSON.parse(data.body).data)
+  })
   .catch(err=>{return err})
 }
 
